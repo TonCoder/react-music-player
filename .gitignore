@@ -1,0 +1,10 @@
+/node_modules
+bundle.js
+npm-debug.log
+.DS_Store
+
+# IntelliJ
+*.iml
+/.idea
+
+node_modules/babel-core/node_modules/lodash/fp/startCase.js
