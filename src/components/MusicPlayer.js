@@ -15,7 +15,7 @@ export default class MusicCard extends Component {
             <MusicControls  songData={this.props.songData}>
                 <SongDetails songData={this.props.songData}/>
             </MusicControls>
-            <MusicList songsList={this.props.songData.songs}/>
+            <MusicList albumData={this.props.songData}/>
         </div>
     );
   }

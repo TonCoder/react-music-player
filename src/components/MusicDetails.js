@@ -20,7 +20,7 @@ export default function MusicDetails(props){
     return(
         <div className="col-xs-12">
             <div className="card-text">
-                <span className="songPlaying">{props.songData.songPlaying}</span>
+                <span className="songPlayingTitle">{props.songData.currentlyPlaying.title}</span>
                 <br/>
                 <span className="artistName"> Artist: {props.songData.artist}</span>
                 <br/>

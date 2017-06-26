@@ -3,19 +3,20 @@
     padding: 0 !important;
     box-shadow: #000 0 8px 10px -2px;
     min-width: 260px;
+    
+    .card-title{
+        text-align: center;
+        font-weight: bold;
+        font-size: 1.2rem;
+        border-bottom: #000 solid 2px;
+    }
+    
+    .card-text{
+        margin: 10px 0 !important;
+        text-align: center;
+    }    
 }
 
-.card-title{
-    text-align: center;
-    font-weight: bold;
-    font-size: 1.2rem;
-    border-bottom: #000 solid 2px;
-}
-
-.card-text{
-    margin: 10px 0 !important;
-    text-align: center;
-}
 
 .artistName{
     color: #6294b6;
@@ -44,15 +45,6 @@
     padding: 3% !important;
 }
 
-.list-group-item{
-    width: 100%;
-    border-radius: 10px;
-}
-
-.list-group-item:hover{
-    background: #eee;
-    cursor: pointer;
-}
 
 .button{
     border-radius: 50%;
@@ -71,6 +63,15 @@
 }
 
 
+.list-group-item{
+    width: 100%;
+    border-radius: 10px;
+}
+
+.list-group-item:hover{
+    background: #eee;
+    cursor: pointer;
+}
 .center{
     margin: 0 auto !important;
     width: 185px;
@@ -110,3 +111,4 @@ input::-webkit-slider-thumb {
     background: linear-gradient(top, #80e4df 0%, #75dbd6 13%, #5ec4bf 33%, #57bbb6 47%, #419d99 80%, #378f8b 100%); /* W3C */
 }
  
+

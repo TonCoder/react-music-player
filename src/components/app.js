@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import MusicCard from './MusicPlayer';
 
-
 export default class App extends Component {
         constructor(props){
         super(props);
@@ -12,8 +11,10 @@ export default class App extends Component {
                     "artist": "Trinity",
                     "albumName": "Tethered",
                     "coverArt": "http://unrealitymag.com/wp-content/uploads/2015/01/80s_Villains_3.jpg",
-                    "songPlaying": "The flying star child",
-                    "currentlyPlaying" : new Audio('./songs/SampleAudio.mp3'),
+                    "currentlyPlaying" :{ 
+                        audio:  new Audio('./songs/SampleAudio.mp3'),
+                        title: "The flying star child"
+                    },
                     "songs": [
                         {
                             "songName": "The Flying Star Child",

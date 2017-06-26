@@ -4,8 +4,7 @@ import React, { Component } from 'react';
 export default class MusicControls extends Component{
     constructor(props){
         super(props);
-        var currentlyPlaying;
-        
+    
         this.state = {
             
             "songTime": {
@@ -23,7 +22,7 @@ export default class MusicControls extends Component{
         };
         
         this.onPlayClicked = this.onPlayClicked.bind(this);
-    }
+    };
     
     convertTime(time){
         var parsedTime = parseInt(time, 10);
@@ -34,7 +33,7 @@ export default class MusicControls extends Component{
     };
     
     onSliderChange(e){
-        let songPlaying = this.props.songData.currentlyPlaying;
+        let songPlaying = this.props.songData.currentlyPlaying.audio;
             songPlaying.currentTime  = e.target.value;
             this.setSeekState(songPlaying.startTime, songPlaying.duration, e.target.value );
             this.setSongState(e.target.value, songPlaying.duration);
@@ -50,7 +49,7 @@ export default class MusicControls extends Component{
     };
     
     onPlayClicked(){
-        let songPlaying = this.props.songData.currentlyPlaying;
+        let songPlaying = this.props.songData.currentlyPlaying.audio;
         let self = this;
         
         this.setState({ "isPlaying": true });
@@ -68,7 +67,7 @@ export default class MusicControls extends Component{
     
     onPauseClicked(e){
        this.setState({"isPlaying": false})
-       let songPlaying = this.props.songData.currentlyPlaying;
+       let songPlaying = this.props.songData.currentlyPlaying.audio;
        songPlaying.pause();
     };
     

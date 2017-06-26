@@ -4,8 +4,8 @@ import MusicListItem from './music_list_items';
 
 function musicList(props) {
     var index = 0;
-    const songs = props.songsList.map(function(data){
-        return <MusicListItem key={index++}  name={data.songName}/>
+    const songs = props.albumData.songs.map(function(data){
+        return <MusicListItem key={index++}  name={data.songName} onClick={(event) => { console.log(event.target);  }}/>
     });
     
 

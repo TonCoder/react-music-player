@@ -1,7 +1,15 @@
+function getEntrySources(sources, isProduction) {
+    if (!isProduction) {
+        sources.push('webpack-dev-server/client?http://localhost:8080');
+    }
+
+    return sources;
+}
+
 module.exports = {
-  entry: [
-    './src/index.js'
-  ],
+  entry: getEntrySources([
+        './src/index.js'
+  ], false),
   output: {
     path: __dirname,
     publicPath: '/',
