@@ -29,9 +29,6 @@ export default class MusicPlayer extends Component {
         this.onCurrentlyPlayingChange = this.onCurrentlyPlayingChange.bind(this);
     };
     
-    getAlbumSelected(){
-        return this.albumSelected;
-    }
     
     onCurrentlyPlayingChange(songName, songUrl){
         console.log(songName, songUrl);
@@ -50,7 +47,7 @@ export default class MusicPlayer extends Component {
     return (
         <div className="row col-xs-4 card">
             <img className="card-img-top" src={this.state.Album.coverArt} alt="Card image cap" width="100%"/>
-            <MusicControls  songData={this.state.Album}>
+            <MusicControls  currentlyPlaying={this.state.currentlyPlaying} skipMusic={this.onCurrentlyPlayingChange} albumSongs={this.state.Album.songs}>
                 <SongDetails artistName={this.state.Album.artist} albumName={this.state.Album.albumName} songPlayingName={this.state.currentlyPlaying.title}/>
             </MusicControls>
             <MusicList currentlyPlaying={this.state.currentlyPlaying} albumSongs={this.state.Album.songs} onSongSelectedChange={this.onCurrentlyPlayingChange}/>

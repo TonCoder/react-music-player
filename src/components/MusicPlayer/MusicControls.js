@@ -6,7 +6,6 @@ export default class MusicControls extends Component{
         super(props);
     
         this.state = {
-            
             "songTime": {
                 "remaining": "0:0",
                 "passed": "0:0"
@@ -22,6 +21,8 @@ export default class MusicControls extends Component{
         };
         
         this.onPlayClicked = this.onPlayClicked.bind(this);
+        this.onPrevClicked = this.onPrevClicked.bind(this);
+        this.onNextClicked = this.onNextClicked.bind(this);
     };
     
     convertTime(time){
@@ -33,7 +34,7 @@ export default class MusicControls extends Component{
     };
     
     onSliderChange(e){
-        let songPlaying = this.props.songData.currentlyPlaying.audio;
+        let songPlaying = this.props.currentlyPlaying.audio;
             songPlaying.currentTime  = e.target.value;
             this.setSeekState(songPlaying.startTime, songPlaying.duration, e.target.value );
             this.setSongState(e.target.value, songPlaying.duration);
@@ -45,11 +46,11 @@ export default class MusicControls extends Component{
     };
     
     setSeekState(min, max, value){
-        this.setState({ "seekInfo": {"min": parseInt(min, 10), "max":  parseInt(max, 10), "value":  value }});
+        this.setState({ "seekInfo": {"min": parseInt(min || 0, 10), "max":  parseInt(max || 0, 10), "value":  value }});
     };
     
     onPlayClicked(){
-        let songPlaying = this.props.songData.currentlyPlaying.audio;
+        let songPlaying = this.props.currentlyPlaying.audio;
         let self = this;
         
         this.setState({ "isPlaying": true });
@@ -67,18 +68,48 @@ export default class MusicControls extends Component{
     
     onPauseClicked(e){
        this.setState({"isPlaying": false})
-       let songPlaying = this.props.songData.currentlyPlaying.audio;
+       let songPlaying = this.props.currentlyPlaying.audio;
        songPlaying.pause();
     };
     
-    onPrevClicked(){
+    onSkipMusic(skipType){
+        let prevNext = skipType === "skip" ? 1 : -1;
+
         
+        this.setSeekState(0,0,0);
+        
+        
+        for(var i = 0; i < this.props.albumSongs.length; i++){
+            if(this.props.albumSongs[i].songName === this.props.currentlyPlaying.title){
+                prevNext = i + prevNext;
+                
+                if(prevNext <= 0){
+                    prevNext = this.props.albumSongs.length - 1;
+                }
+                else if( prevNext >= this.props.albumSongs.length){
+                    prevNext = 0;
+                }
+                
+                
+                return this.props.albumSongs[prevNext];
+            }
+        }
+               
+
+    }
+    
+    
+    onPrevClicked(){
+        let prevSong =  this.onSkipMusic("prev");
+        this.props.skipMusic(prevSong.songName, prevSong.songUrl);
     };
     
     onNextClicked(){
-        
+        let nextSong = this.onSkipMusic("skip");
+        this.props.skipMusic(nextSong.songName, nextSong.songUrl);
     };
     
+
     
     render(){
         
