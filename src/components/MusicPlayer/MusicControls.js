@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import MusicList from './music_list';
 
 export default class MusicControls extends Component{
     constructor(props){
@@ -23,6 +23,7 @@ export default class MusicControls extends Component{
         this.onPlayClicked = this.onPlayClicked.bind(this);
         this.onPrevClicked = this.onPrevClicked.bind(this);
         this.onNextClicked = this.onNextClicked.bind(this);
+        this.onSongSelectedChange = this.onSongSelectedChange.bind(this);
     };
     
     convertTime(time){
@@ -46,7 +47,7 @@ export default class MusicControls extends Component{
     };
     
     setSeekState(min, max, value){
-        this.setState({ "seekInfo": {"min": parseInt(min || 0, 10), "max":  parseInt(max || 0, 10), "value":  value }});
+        this.setState({ "seekInfo": {"min": parseInt(min || 0, 10), "max":  parseInt(max || 0, 10), "value":  value || 0 }});
     };
     
     onPlayClicked(){
@@ -75,21 +76,20 @@ export default class MusicControls extends Component{
     onSkipMusic(skipType){
         let prevNext = skipType === "skip" ? 1 : -1;
 
+        this.onPauseClicked();        
         
-        this.setSeekState(0,0,0);
-        
-        
+        // Iterate through songs to see which one is currently playing
         for(var i = 0; i < this.props.albumSongs.length; i++){
-            if(this.props.albumSongs[i].songName === this.props.currentlyPlaying.title){
+            // Confirm which is playing 
+            if(this.props.albumSongs[i].songName.toLowerCase() === this.props.currentlyPlaying.title.toLowerCase()){
                 prevNext = i + prevNext;
                 
-                if(prevNext <= 0){
+                if(prevNext < 0){
                     prevNext = this.props.albumSongs.length - 1;
                 }
-                else if( prevNext >= this.props.albumSongs.length){
+                else if(prevNext >= this.props.albumSongs.length){
                     prevNext = 0;
                 }
-                
                 
                 return this.props.albumSongs[prevNext];
             }
@@ -97,19 +97,38 @@ export default class MusicControls extends Component{
                
 
     }
-    
-    
+       
     onPrevClicked(){
+        let self = this;
+        
+        this.onPauseClicked();        
         let prevSong =  this.onSkipMusic("prev");
         this.props.skipMusic(prevSong.songName, prevSong.songUrl);
+        setTimeout(function(){
+            self.onPlayClicked();
+        }, 300);
     };
     
     onNextClicked(){
-        let nextSong = this.onSkipMusic("skip");
-        this.props.skipMusic(nextSong.songName, nextSong.songUrl);
+        let self = this;
+        
+        this.onPauseClicked();        
+        let prevSong =  this.onSkipMusic("skip");
+        this.props.skipMusic(prevSong.songName, prevSong.songUrl);
+        setTimeout(function(){
+            self.onPlayClicked();
+        }, 300);
     };
     
-
+    onSongSelectedChange(songName, songUrl){
+        let self = this;
+        
+        this.onPauseClicked(); 
+        this.props.skipMusic(songName, songUrl);
+        setTimeout(function(){
+            self.onPlayClicked();
+        }, 300); 
+    }
     
     render(){
         
@@ -139,6 +158,7 @@ export default class MusicControls extends Component{
                     <button id="next" className="next button" onClick={this.onNextClicked}><i className="fa fa-fast-forward" aria-hidden="true"></i></button>
                 </div>
                 {this.props.children}
+                <MusicList currentlyPlaying={this.props.currentlyPlaying} albumSongs={this.props.albumSongs} onSongSelectedChange={this.onSongSelectedChange}/>
             </div>
         )
     }

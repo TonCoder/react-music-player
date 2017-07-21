@@ -20,8 +20,8 @@ function musicList(props) {
                 
 
     return(
-        <div className="col-xs-12">
-          <ul className="list-group list-group-flush">
+        <div className="listHolder">
+          <ul className="list-group list-group-flush listStyling">
               {songs}
           </ul>
         </div>

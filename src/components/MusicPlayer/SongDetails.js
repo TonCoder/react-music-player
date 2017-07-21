@@ -1,7 +1,6 @@
 import React from 'react';
 
 export default function SongDetails(props){
-    
     return(
         <div className="col-xs-12">
             <div className="card-text">

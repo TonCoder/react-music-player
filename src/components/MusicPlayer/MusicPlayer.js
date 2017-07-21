@@ -40,6 +40,7 @@ export default class MusicPlayer extends Component {
                         "title": songName
             }
         });
+        
     };
     
     
@@ -50,7 +51,6 @@ export default class MusicPlayer extends Component {
             <MusicControls  currentlyPlaying={this.state.currentlyPlaying} skipMusic={this.onCurrentlyPlayingChange} albumSongs={this.state.Album.songs}>
                 <SongDetails artistName={this.state.Album.artist} albumName={this.state.Album.albumName} songPlayingName={this.state.currentlyPlaying.title}/>
             </MusicControls>
-            <MusicList currentlyPlaying={this.state.currentlyPlaying} albumSongs={this.state.Album.songs} onSongSelectedChange={this.onCurrentlyPlayingChange}/>
         </div>
     );
   }
