@@ -44,31 +44,26 @@ Navigate to app.js file and change/add your music information. example:
 ```
 
 As you can see it is pretty straight forward, but just in case:
-
-#Albums :
-Using standard JSON, you will place your albums under this object, separated by comma for every additional album
-
-#artist:
-This is the artist Name
-
-#albumName:
-ummm.... the album name goes here.
-
-#coverArt:
-You need to add the url or file path to this field property
-
-#songs:
-This is an array of all the songs for the specific album which contain the following info:
-   #songName :  Where you include the name of the song
-   #songUrl : Where you include the path of the song to play
+-Albums :
+  Using standard JSON, you will place your albums under this object, separated by comma for every additional album
+-artist:
+  This is the artist Name
+-albumName:
+  ummm.... the album name goes here.
+-coverArt:
+  You need to add the url or file path to this field property
+-songs:
+  This is an array of all the songs for the specific album which contain the following info:
+     #songName :  Where you include the name of the song
+     #songUrl : Where you include the path of the song to play
    
    
-##Styles
+###Styles
 The Music Player style is located under the Style folder, as Style.css
 
 
-##Preview of Music Player
+###Preview of Music Player
 Sorry at the moment I have nothing for ya, but check back to find out!
 
-##Changes and updates
+###Changes and updates
 Please feel free to change it to your benefit.
